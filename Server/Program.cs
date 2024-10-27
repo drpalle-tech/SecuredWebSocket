@@ -5,12 +5,13 @@ public class Program
 {
     public static void Main(string[] args)
     {
-        var server = new WebSocketServer("ws://localhost:4649");
+        var server = new WebSocketServer("wss://localhost:4649");
 
-        //string cert = "***CERTIFICATE PATH***";
-        //string password = "***PWD***";
-
-        //server.SslConfiguration.ServerCertificate = new System.Security.Cryptography.X509Certificates.X509Certificate2(cert, password);
+        //The next block is meant only for the secuerd web sockets.
+        //For unsecure connections starting with URL as ws://, this block is not needed.
+        string cert = "***CERTIFICATE PATH***";
+        string password = "***PWD***";
+        server.SslConfiguration.ServerCertificate = new System.Security.Cryptography.X509Certificates.X509Certificate2(cert, password);
 
         server.AddWebSocketService<Echo>("/Echo");
 
