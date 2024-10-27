@@ -32,9 +32,9 @@ public class Program
                 (sender, certificate, chain, sslPolicyErrors) => {
                     var data = "Certificate:\n- Issuer: {0}\n- Subject: {1}";
                     var msg = String.Format(data, certificate.Issuer, certificate.Subject);
-                    // If the server certificate is valid.
                     // Must perform security validations based on the client's customization.
                     // No security checks will be an anti-pattern.
+                    // Ex: Domain name is valid || Cert is not expired || Certificate is not blacklisted || Cert is signed by a truested party (like Google).
                     return true; 
             };
 
