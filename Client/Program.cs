@@ -4,7 +4,7 @@ public class Program
 {
     public static void Main (string[] args)
     {
-        using (var client = new WebSocket("ws://localhost:4649/Echo"))
+        using (var client = new WebSocket("wss://localhost:4649/Echo"))
         {
             client.OnOpen += (sender, e) =>
             {
@@ -32,7 +32,10 @@ public class Program
                 (sender, certificate, chain, sslPolicyErrors) => {
                     var data = "Certificate:\n- Issuer: {0}\n- Subject: {1}";
                     var msg = String.Format(data, certificate.Issuer, certificate.Subject);
-                    return true; // If the server certificate is valid.
+                    // If the server certificate is valid.
+                    // Must perform security validations based on the client's customization.
+                    // No security checks will be an anti-pattern.
+                    return true; 
             };
 
             client.Connect();
